@@ -10,6 +10,7 @@ export class AccountSettingsComponent implements OnInit {
   constructor(private settingsService: SettingsService) { }
 
   ngOnInit(): void {
+    this.settingsService.checkCurrentTheme();
   }
 
   changeTheme(theme: string){
