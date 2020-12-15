@@ -21,6 +21,8 @@ export class SidebarComponent implements OnInit {
   }
 
   logout(){
-this.router.navigateByUrl('/login');
+  this.router.navigateByUrl('/login');
+  localStorage.removeItem('email');
+  localStorage.removeItem('token');
   }
 }

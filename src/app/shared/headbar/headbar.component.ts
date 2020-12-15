@@ -14,8 +14,10 @@ export class HeadbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){
+  logout(){
   this.router.navigateByUrl('/login');
+  localStorage.removeItem('email');
+  localStorage.removeItem('token');
   }
 
 }

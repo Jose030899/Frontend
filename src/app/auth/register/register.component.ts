@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,7 @@ export class RegisterComponent {
     }
   );
 
-  constructor(private formBuilder: FormBuilder,private usuarioService:UsuarioService) {}
+  constructor(private formBuilder: FormBuilder,private usuarioService:UsuarioService, private router: Router) {}
 
   crearUsuario() {
     this.formSubmitted = true;
@@ -41,6 +42,7 @@ export class RegisterComponent {
           confirmButtonText: 'Ok'
         });
         console.log(resp);
+        this.router.navigateByUrl('/');
       }else{
         Swal.fire({
           title: 'Error!',
