@@ -97,6 +97,8 @@ export class LoginComponent implements OnInit {
 
           this.usuarioService.loginGoogle(id_token).subscribe((statusback: any) =>{
             if(statusback.status){
+            console.log(id_token);
+            
               localStorage.setItem('email', googleuser);
               this.router.navigateByUrl('/');
             }
