@@ -32,14 +32,23 @@ export class RegisterComponent {
     console.log(this.registerForm.value);
     if (this.registerForm.valid) {
       this.usuarioService.crearUsuario(this.registerForm.value)
-      .subscribe(resp => {
+      .subscribe((resp:any) => {
+        if(resp.status){
         Swal.fire({
           title: 'Exito!',
-          text: 'Registro correcto',
+          text: resp.message,
           icon: 'success',
           confirmButtonText: 'Ok'
         });
         console.log(resp);
+      }else{
+        Swal.fire({
+          title: 'Error!',
+          text: resp.message,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      }
       }, (err)=> console.warn(err));
     } else {
       console.log('formulario no valido');

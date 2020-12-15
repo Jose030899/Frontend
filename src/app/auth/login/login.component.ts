@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     this.usuarioService.login(this.loginForm.value).subscribe((resp: any) => {
       if (resp.status) {
         if (this.loginForm.get('remember').value) {
+          //console.log(resp.status);
           localStorage.setItem('email', this.loginForm.get('email').value);
         } else {
           localStorage.removeItem('email');
@@ -92,8 +93,14 @@ export class LoginComponent implements OnInit {
     this.auth2.attachClickHandler(element, {},
         (googleUser) => {
           const id_token = googleUser.getAuthResponse().id_token;
-          console.log(id_token);
-          this.usuarioService.loginGoogle(id_token).subscribe();
+          const googleuser=googleUser.getBasicProfile().du;
+
+          this.usuarioService.loginGoogle(id_token).subscribe((statusback: any) =>{
+            if(statusback.status){
+              localStorage.setItem('email', googleuser);
+              this.router.navigateByUrl('/');
+            }
+          });
         },
         (error) => {
           alert(JSON.stringify(error, undefined, 2));
